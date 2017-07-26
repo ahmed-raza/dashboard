@@ -1,0 +1,6 @@
+name: Dashboard
+description: Dashboard module with nice google charts.
+type: module
+package: Administration
+core: 8.x
+configure: dashboard.index
