@@ -4,9 +4,10 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
 
   var data = google.visualization.arrayToDataTable([
-    ['Task', 'Hours per Day'],
-    ['Published',   3],
-    ['Unpublished', 0],
+    ['Task', 'Nodes status'],
+    ['Events',   3],
+    ['Basic Page', 0],
+    ['Article', 0],
   ]);
 
   var options = {
@@ -18,14 +19,21 @@ function drawChart() {
 
   setInterval(function(){
     jQuery.getJSON('/admin/dashboard/data', function(result){
-      data.setValue(0, 1, result.nodes.published);
+      data.setValue(0, 1, result.nodes.events);
       chart.draw(data, options);
     });
   }, 5000);
 
   setInterval(function(){
     jQuery.getJSON('/admin/dashboard/data', function(result){
-      data.setValue(1, 1, result.nodes.unpublished);
+      data.setValue(1, 1, result.nodes.pages);
+      chart.draw(data, options);
+    });
+  }, 5000);
+
+  setInterval(function(){
+    jQuery.getJSON('/admin/dashboard/data', function(result){
+      data.setValue(2, 1, result.nodes.articles);
       chart.draw(data, options);
     });
   }, 5000);

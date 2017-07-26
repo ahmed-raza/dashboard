@@ -12,20 +12,13 @@ class DashboardController extends ControllerBase {
   }
 
   public function data() {
-    $nids   = \Drupal::entityQuery('node')->execute();
-    $nodes  =  \Drupal\node\Entity\Node::loadMultiple($nids);
-    $unpublished  = [];
-    $published    = [];
-    foreach ($nodes as $node) {
-      if ($node->isPublished()) {
-        array_push($published, $node);
-      } else {
-        array_push($unpublished, $node);
-      }
-    }
+    $events   = \Drupal::entityQuery('node')->condition('type','events')->execute();
+    $pages   = \Drupal::entityQuery('node')->condition('type','page')->execute();
+    $articles   = \Drupal::entityQuery('node')->condition('type','article')->execute();
     $data = array('nodes' => [
-      'published'   => count($published),
-      'unpublished' => count($unpublished),
+      'events'   => count($events),
+      'pages' => count($pages),
+      'articles' => count($articles),
     ]);
     return new JsonResponse($data);
   }
