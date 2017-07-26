@@ -1,0 +1,12 @@
+dashboard.lib:
+  version: 8.x
+  js:
+    js/google-charts-loader.js: {}
+    js/dashboard.js: {}
+  css:
+    theme:
+      css/dashboard.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupal.ajax
