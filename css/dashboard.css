@@ -10,3 +10,18 @@ body .layout-container {
   width: 50%;
   float: left;
 }
+.red {
+   animation-duration: 700ms;
+   animation-name: blink;
+   animation-iteration-count: infinite;
+   animation-direction: alternate;
+   color: red;
+}
+@keyframes blink {
+   from {
+      opacity: 1;
+   }
+   to {
+      opacity: 0;
+   }
+ }
