@@ -8,10 +8,9 @@ use \Drupal\Core\Link;
 
 class DashboardController extends ControllerBase {
   public function index() {
-    $build = [
-      '#type'   => 'markup',
-      '#markup' => t('Hello world!')
+    return [
+      '#theme' => 'dashboard',
+      '#test_var' => $this->t('Test Value'),
     ];
-    return $build;
   }
 }
