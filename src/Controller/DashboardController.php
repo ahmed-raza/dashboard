@@ -1,16 +1,32 @@
 <?php
 
 namespace Drupal\dashboard\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
-use \Drupal\Core\Link;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DashboardController extends ControllerBase {
   public function index() {
     return [
       '#theme' => 'dashboard',
-      '#test_var' => $this->t('Test Value'),
     ];
+  }
+
+  public function data() {
+    $nids   = \Drupal::entityQuery('node')->execute();
+    $nodes  =  \Drupal\node\Entity\Node::loadMultiple($nids);
+    $unpublished  = [];
+    $published    = [];
+    foreach ($nodes as $node) {
+      if ($node->isPublished()) {
+        array_push($published, $node);
+      } else {
+        array_push($unpublished, $node);
+      }
+    }
+    $data = array('nodes' => [
+      'published'   => count($published),
+      'unpublished' => count($unpublished),
+    ]);
+    return new JsonResponse($data);
   }
 }

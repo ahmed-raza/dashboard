@@ -6,3 +6,11 @@ dashboard.index:
     type: new
   requirements:
     _permission: 'administer site configuration'
+dashboard.data:
+  path: 'admin/dashboard/data'
+  defaults:
+    _controller: '\Drupal\dashboard\Controller\DashboardController::data'
+    _title: 'Dashboard Data'
+    type: new
+  requirements:
+    _permission: 'administer site configuration'
