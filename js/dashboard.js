@@ -55,3 +55,41 @@ function drawChart() {
   }, 5000);
   chart.draw(data, options);
 }
+
+google.charts.load('current', {'packages':['gauge']});
+google.charts.setOnLoadCallback(drawGaugeChart);
+
+function drawGaugeChart() {
+
+  var data = google.visualization.arrayToDataTable([
+    ['Label', 'Value'],
+    ['', 1],
+  ]);
+
+  var options = {
+    min: 0,
+    max: 10,
+    width: 400, height: 300,
+    redFrom: 9, redTo: 10,
+    yellowFrom:7.5, yellowTo: 9,
+    minorTicks: 5,
+    animation: {
+      duration: 2000,
+    },
+    majorTicks: ['0','2','4','6','8','10'],
+  };
+
+  var chart = new google.visualization.Gauge(document.getElementById('guage'));
+
+  chart.draw(data, options);
+
+  setInterval(function() {
+    jQuery.getJSON('/admin/dashboard/data', function(result){
+      data.setValue(0, 1, result.users.online);
+      chart.draw(data, options);
+      if (result.users.online > 7) {
+        jQuery('strong').addClass('red');
+      }
+    });
+  }, 3000);
+}
