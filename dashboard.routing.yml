@@ -1,0 +1,8 @@
+dashboard.index:
+  path: 'admin/dashboard'
+  defaults:
+    _controller: '\Drupal\dashboard\Controller\DashboardController::index'
+    _title: 'Dashboard'
+    type: new
+  requirements:
+    _permission: 'administer site configuration'
