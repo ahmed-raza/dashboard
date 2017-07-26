@@ -5,14 +5,30 @@ function drawChart() {
 
   var data = google.visualization.arrayToDataTable([
     ['Task', 'Nodes status'],
-    ['Events',   3],
-    ['Basic Page', 0],
-    ['Article', 0],
+    ['Events',   1],
+    ['Basic Page', 1],
+    ['Article', 1],
   ]);
 
   var options = {
     title: 'Nodes status',
+    titleTextStyle: {
+      color: 'limegreen'
+    },
+    tooltip: {
+      textStyle: {
+        color: 'limegreen'
+      }
+    },
+    legend: {
+      textStyle: {
+        color: 'limegreen'
+      }
+    },
     is3D: true,
+    backgroundColor: {
+      fill: '#333'
+    },
   };
 
   var chart = new google.visualization.PieChart(document.getElementById('nodes-chart'));
